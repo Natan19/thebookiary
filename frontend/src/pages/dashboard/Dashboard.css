@@ -1,0 +1,29 @@
+.header {
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    flex-flow: row nowrap;
+    background-color: #FFF;
+    justify-content: center;
+    align-items: center;
+}
+.header .header-content-container > img {
+    cursor: pointer;
+}
+.header .header-content-container {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 100%;
+}
+.header .header-content-container .searchbar-container {
+    flex-grow: 0.3;
+}
+.content-container {
+    min-height: 100vh;
+    width: 100vw;
+    padding-top: 10px;
+    background-color: #FAFAFA;
+}

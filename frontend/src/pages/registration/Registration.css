@@ -1,0 +1,51 @@
+.registration-container {
+    max-width: 900px;
+    margin: 100px auto 0;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+.registration-container .logo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.registration-container .fields-container {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 30px;
+    width: 500px;
+}
+.registration-container .fields-container > h1 {
+    color: #18A0FB;
+}
+.registration-container .fields-container form{
+    display: flex;
+    flex-flow: row wrap;
+}
+.registration-container .fields-container form > * {
+    align-self: center;
+}
+.registration-container .fields-container button.btn {
+    width: 130px;
+    height: 40px;
+    margin: 10px auto 0 auto;
+}
+.registration-container .fields-container input {
+    margin: 0 0 5px 0;
+}
+.registration-container .fields-container input.name-input,
+.registration-container .fields-container input.lastname-input {
+    width: 49.4%;
+}
+.registration-container .fields-container input:nth-child(1) {
+    margin-right: 2.5px;
+}
+.registration-container .fields-container input:nth-child(2) {
+    margin-left: 2.5px;
+}
