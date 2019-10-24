@@ -17,7 +17,8 @@ mongoose.connect('mongodb+srv://omnistack-natan:9ojtYpwDoSCRKqXj@cluster0-gtna0.
 });
 const corsOptions = {
 	origin: 'http://localhost:3001',
-	optionsSucessStatus: 200
+	optionsSucessStatus: 200,
+	exposedHeaders: ['x-auth-token']
 };
 
 app.use(cors(corsOptions));

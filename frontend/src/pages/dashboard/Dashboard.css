@@ -1,11 +1,12 @@
 .header {
-    width: 100vw;
+    width: 99vw;
     height: 80px;
     display: flex;
     flex-flow: row nowrap;
     background-color: #FFF;
     justify-content: center;
     align-items: center;
+    padding: 20px
 }
 .header .header-content-container > img {
     cursor: pointer;
@@ -23,7 +24,42 @@
 }
 .content-container {
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     padding-top: 10px;
     background-color: #FAFAFA;
+    padding: 20px;
+    display: flex;
+    flex-flow: row wrap;
+}
+.content-container .book-container {
+    height: 450px;
+    min-width: 200px;
+    max-width: 250px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 10px;
+}
+.content-container .book-container > img {
+    object-fit: contain;
+    height: 300px;
+}
+.content-container .book-container .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    width: 207px;
+}
+.content-container .book-container .info-container > h4 {
+    color: #18A0FB;
+    margin: 5px 0 5px 0;
+}
+.content-container .book-container .info-container p {
+    font-weight: lighter;
+    font-size: 14px;
+}
+.content-container .book-container .info-container p > span {
+    color: #18A0FB;
+    font-weight: normal;
+    font-size: 16px;
 }

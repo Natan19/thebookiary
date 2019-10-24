@@ -27,6 +27,8 @@ export default function Registration({ history }) {
                     toast.error('Erro ao cadastrar!', { autoClose: 2000 });
                     return;
                 }
+                const token = response.headers.get('x-auth-token');
+                localStorage.setItem('x-auth-token', token);
                 toast.success('Cadastro efetuado com sucesso!', {
                     onClose: () => history.push('/dashboard'),
                     autoClose: 1000
@@ -51,7 +53,7 @@ export default function Registration({ history }) {
                         <input type="text" onChange={(e) => setLastname(e.target.value)} className="lastname-input" placeholder="Last name"/>
                         <input type="email" onChange={(e) => setEmail(e.target.value)} className="email-input" placeholder="Email address"/>
                         <input type="password" onChange={(e) => setPassword(e.target.value)} className="password-input" placeholder="Create password"/>
-                        <button className="btn" type="submit">Login</button>
+                        <button className="btn" type="submit">Registrate</button>
                     </form>
                 </div>
             </div>

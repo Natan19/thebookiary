@@ -22,6 +22,8 @@ export default function Login({ history }) {
                     toast.error('Wrong email or password!', { autoClose: 2000 });
                     return;
                 }
+                const token = response.headers.get('x-auth-token');
+                localStorage.setItem('x-auth-token', token);
                 toast.success('Success! You are now being redirected to the dashboard.', {
                     onClose: () => history.push('/dashboard'),
                     autoClose: 1000
