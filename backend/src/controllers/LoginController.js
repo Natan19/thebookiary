@@ -12,7 +12,7 @@ module.exports = {
 			});
 			const token = savedUser.generateAuthToken();
 			res.header('x-auth-token', token).send({
-				'success':'login authentication was succesful!'
+				'success':'login authentication was successful!'
 			});
 		}
 		return res.status(400).json({ error: 'user not found!'});
@@ -33,6 +33,7 @@ module.exports = {
 			email
 		});
 		user.password = await bcrypt.hash(user.password, 10);
+		
 		try {
 			await user.save();
 		} catch (error) {

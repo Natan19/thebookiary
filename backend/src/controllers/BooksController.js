@@ -16,18 +16,21 @@ module.exports = {
 	},
 	async store(req, res) {
 		const userId = req.user._id;
-		const { title, author, categories, pageCount, thumbnail } = req.body;
+		const { title, authors, categories, pageCount } = req.body;
+		const thumbnail = req.body.imageLinks.thumbnail;
+		
+		console.log(authors);
 		const savebooks = await Books.create({
 			user: userId,
 			title,
-			author,
+			authors,
 			categories,
 			pageCount,
-			thumbnail			
+			thumbnail
 		});
 		
 		await savebooks.populate('user').execPopulate();
-	
+		
 		return res.json(savebooks);
 	},
 	async listBooks(req, res) {

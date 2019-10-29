@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@opuscapita/react-searchbar": "^2.1.1"
+  }
+}

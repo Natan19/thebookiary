@@ -13,7 +13,7 @@ export default function Landing({ history }) {
             <div className="landing-container">
                 <div className="logo-container"><img src={logo} alt="TheBookiary"/></div>
                 <div className="blurb-container">
-                    Welcome to The Bookiary, a platform to help you keep tracking of your booking habits.
+                    Welcome to The Bookiary, a platform to help you keep track of your reading habits.
                     <p>Log in or register to begin!</p>
                 </div>
                 <div className="buttons-container">

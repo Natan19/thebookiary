@@ -29,7 +29,7 @@ export default function Registration({ history }) {
                 }
                 const token = response.headers.get('x-auth-token');
                 localStorage.setItem('x-auth-token', token);
-                toast.success('Cadastro efetuado com sucesso!', {
+                toast.success('Registration was successful!', {
                     onClose: () => history.push('/dashboard'),
                     autoClose: 1000
                 });

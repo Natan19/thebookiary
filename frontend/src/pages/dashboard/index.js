@@ -3,30 +3,54 @@ import { Helmet } from 'react-helmet';
 import './Dashboard.css';
 import logo from '../../assets/dashboard-logo.svg';
 import { toast, ToastContainer } from 'react-toastify';
+import SearchBar from '../../components/SearchBar/index';
 
 export default function Dashboard({ history }) {
-    const[books, setBooks] = useState([]);
-    const[searchParam, setSearchParam] = useState('');
-    fetch(process.env.REACT_APP_API_URL+'/api/listBooks', {
-        method: 'GET',
-        headers:{
-            authorization: localStorage.getItem('x-auth-token')
-        }
-    })
-    .then(response=>response.json())
-    .then(
-        function(response){
-            if(response.status === 400) {
-                toast('An error occuredd with your request', { autoClose: 2000});
-                return;
-            }
-            setBooks(response);
-        }
-    );
+    const[savedBooks, setSavedBooks] = useState([]);
+    const[bookInfo, setBookInfo] = useState({});
+    
     useEffect(() => {
-        if (searchParam.length > 3) {
+        if(Object.keys(bookInfo).length != 0) {
+            fetch(process.env.REACT_APP_API_URL+'/api/books', {
+                method: 'POST',
+                headers:{
+                    authorization: localStorage.getItem('x-auth-token'),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(bookInfo.volumeInfo)
+            })
+            .then(response=>response.json())
+            .then(
+                function(response){
+                    if(response.status === 400) {
+                        toast.error('An error occuredd with your request', { autoClose: 2000});
+                        return;
+                    }
+                    toast.success('The book was successfully added to your list!', { autoClose: 2000});
+                }
+            )
         }
-    }, [searchParam]);
+    }, [bookInfo]);
+
+    useEffect(() => {
+        fetch(process.env.REACT_APP_API_URL+'/api/listBooks', {
+            method: 'GET',
+            headers:{
+                authorization: localStorage.getItem('x-auth-token')
+            }
+        })
+        .then(response=>response.json())
+        .then(
+            function(response){
+                if(response.status === 400) {
+                    toast('An error occuredd with your request', { autoClose: 2000});
+                    return;
+                }
+                setSavedBooks(response);
+            }
+        );
+    }, [bookInfo ]);
+
     return (
         <>
             <Helmet>
@@ -38,14 +62,14 @@ export default function Dashboard({ history }) {
                 <div className="header-content-container">
                     <img src={logo} alt="dashboard-logo" onClick={() => history.push('/')}/>
                     <div className="searchbar-container">
-                        <input type="text" onChange={(e) => setSearchParam(e.target.value)} placeholder="Find a book"/>
+                        <SearchBar setSelectedResult={setBookInfo}/>
                     </div>
                     <div className="userinfo-container">
                     </div>
                 </div>
             </div>
             <div className="content-container">
-                {books.map(book => (<div className="book-container" key={book._id}>
+                {savedBooks.map(book => (<div className="book-container" key={book._id}>
                     <img src={book.thumbnail}/>
                     <div className="info-container">
                         <h4>{book.title}</h4>
