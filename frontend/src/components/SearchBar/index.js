@@ -52,7 +52,7 @@ class SearchBar extends Component {
         return (
             <>
                 <div onMouseLeave={() => this.setState({ results: ''})}>
-                    <input type="text" onKeyUp={e => setTimeout(this.setState({ searchParam: e.target.value }), 6000)} placeholder="Find a book"/>
+                    <input type="text" onKeyUp={e => this.setState({ searchParam: e.target.value })} placeholder="Find a book"/>
                     <div className="results-container">
                         {Object.keys(this.state.results).map(key => (
                             <div key={this.state.results[key].id} className="book-container">

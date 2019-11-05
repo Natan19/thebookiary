@@ -19,7 +19,6 @@ module.exports = {
 		const { title, authors, categories, pageCount } = req.body;
 		const thumbnail = req.body.imageLinks.thumbnail;
 		
-		console.log(authors);
 		const savebooks = await Books.create({
 			user: userId,
 			title,

@@ -11,11 +11,9 @@ const BooksSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 255,
     },
-    author: {
-        type: String,
+    authors: {
+        type: Array,
         require: true,
-        minlength: 5,
-        maxlength: 255
     },
     categories: {
         type: Array,
