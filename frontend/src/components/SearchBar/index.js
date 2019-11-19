@@ -51,13 +51,13 @@ class SearchBar extends Component {
     render() {
         return (
             <>
-                <div onMouseLeave={() => this.setState({ results: ''})}>
+                <div>
                     <input type="text" onKeyUp={e => this.setState({ searchParam: e.target.value })} placeholder="Find a book"/>
-                    <div className="results-container">
+                    <div className="results-container" onMouseLeave={() => this.setState({results:[]})}>
                         {Object.keys(this.state.results).map(key => (
                             <div key={this.state.results[key].id} className="book-container">
                                 <img src={this.state.results[key].volumeInfo.imageLinks ? this.state.results[key].volumeInfo.imageLinks.thumbnail : ''}/>
-                                <p>{this.state.results[key].volumeInfo.title}</p>
+                                <p title={this.state.results[key].volumeInfo.title}>{this.state.results[key].volumeInfo.title}</p>
                                 <FaPlus className="FaPlus" onClick={() => this.setSelectedResult(this.state.results[key])} />
                             </div>
                         ))}

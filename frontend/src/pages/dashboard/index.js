@@ -8,6 +8,7 @@ import saveBookInfoToUser from '../../services/saveBookInfoToUser';
 import SearchBar from '../../components/SearchBar/index';
 import Header from '../../components/Header/Header';
 import { toast, ToastContainer } from 'react-toastify';
+import Card from '../../components/Card/Card';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -71,15 +72,7 @@ class Dashboard extends Component {
                     <SearchBar setSelectedResult={this.setSelectedBookInfo}></SearchBar>                    
                 </Header>
                 <div className="content-container">
-                    {this.state.savedBooks.map(book => (<div className="book-container" key={book._id}>
-                        <img src={book.thumbnail}/>
-                        <div className="info-container">
-                            <h4>{book.title}</h4>
-                            <p>Author: <span>{ book.authors ? book.authors.map(author => (author)) : ''}</span></p>
-                            <p>Categories: <span>{book.categories}</span></p>
-                            <p>Page count: <span>{book.pageCount}</span></p>
-                        </div>
-                    </div>))}
+                   <Card bookArr={this.state.savedBooks}/>
                 </div>
             </>
         )

@@ -11,7 +11,7 @@ module.exports = {
 				if(!response) return res.status(400).json({error: 'senha inválida!'});
 			});
 			const token = savedUser.generateAuthToken();
-			res.header('x-auth-token', token).send({
+			return res.header('x-auth-token', token).send({
 				'success':'login authentication was successful!'
 			});
 		}

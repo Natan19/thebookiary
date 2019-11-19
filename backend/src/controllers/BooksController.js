@@ -17,7 +17,12 @@ module.exports = {
 	async store(req, res) {
 		const userId = req.user._id;
 		const { title, authors, categories, pageCount } = req.body;
-		const thumbnail = req.body.imageLinks.thumbnail;
+		let thumbnail;
+		try {
+			thumbnail = req.body.imageLinks.thumbnail;
+		} catch(error) {
+			console.log(error);
+		}
 		
 		const savebooks = await Books.create({
 			user: userId,
@@ -33,6 +38,11 @@ module.exports = {
 		return res.json(savebooks);
 	},
 	async listBooks(req, res) {
+		const client = req.redisClient;
+		client.set('brabo', 'nois');
+		client.get('brabo', function(err, res) {
+			console.log(res);
+		});
 		const listBooks = await Books.find({ user:{ _id: req.user._id }});
 		res.json(listBooks);
 	}

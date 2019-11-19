@@ -2,9 +2,17 @@ const config = require('config');
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
+const redis = require('redis');
 
 const routes = require('./routes');
 const app = express();
+const redisClient = redis.createClient(8100);
+
+redisClient.on('error', (err) => {
+	console.log('err '+err);
+});
+
+redisClient.on('connect', () => console.log('connected'));
 
 if (!config.get('myprivatekey')) {
 	console.error('FATAL ERROR: myprivatekey is not defined.');
@@ -23,6 +31,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(function(req, res, next) {
+	req.redisClient = redisClient;
+	next();
+});
 app.use(routes);
+
 
 app.listen(3000, () => console.log('Rodando!'));
