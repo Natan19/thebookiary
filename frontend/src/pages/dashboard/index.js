@@ -28,6 +28,7 @@ class Dashboard extends Component {
                     toast('An error occured with your request', { autoClose: 2000});
                     return;
                 }
+                console.log(response);
                 this.setState({ savedBooks: response })
             }
         );
@@ -51,9 +52,7 @@ class Dashboard extends Component {
                     this.getBooks();
                 });
             }
-            
         }
-        
     }
     componentWillUnmount() {
     }

@@ -1,7 +1,9 @@
 import React from 'react';
 import logo from '../../assets/dashboard-logo.svg';
-
-export default function Header(props, {history}) {
+import { useHistory } from 'react-router-dom';
+ 
+export default function Header(props) {
+    let history = useHistory();
     return (
         <>
             <div className="header">

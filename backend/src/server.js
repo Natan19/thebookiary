@@ -3,16 +3,20 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const redis = require('redis');
+const bluebird = require('bluebird');
 
 const routes = require('./routes');
 const app = express();
+
+bluebird.promisifyAll(redis.RedisClient.prototype);
+bluebird.promisifyAll(redis.Multi.prototype);
 const redisClient = redis.createClient(8100);
 
 redisClient.on('error', (err) => {
 	console.log('err '+err);
 });
 
-redisClient.on('connect', () => console.log('connected'));
+redisClient.on('connect', () => console.log('==> CONNECTED'));
 
 if (!config.get('myprivatekey')) {
 	console.error('FATAL ERROR: myprivatekey is not defined.');
@@ -36,6 +40,5 @@ app.use(function(req, res, next) {
 	next();
 });
 app.use(routes);
-
 
 app.listen(3000, () => console.log('Rodando!'));

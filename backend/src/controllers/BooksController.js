@@ -1,6 +1,7 @@
 const booksApi = require('../services/booksApi');
 const config = require('config');
 const { Books } = require('../models/books');
+const mongoose = require('mongoose');
 
 module.exports = {
 	async index(req, res) {
@@ -34,16 +35,14 @@ module.exports = {
 		});
 		
 		await savebooks.populate('user').execPopulate();
-		
+		await savebooks.save();
+
 		return res.json(savebooks);
 	},
 	async listBooks(req, res) {
-		const client = req.redisClient;
-		client.set('brabo', 'nois');
-		client.get('brabo', function(err, res) {
-			console.log(res);
-		});
-		const listBooks = await Books.find({ user:{ _id: req.user._id }});
+		const ObjectId = mongoose.Schema.Types.ObjectId;	
+		const userId = new ObjectId(req.user._id);
+		const listBooks = await Books.find({ user: userId });
 		res.json(listBooks);
 	}
 };
